@@ -15,9 +15,9 @@ RUN mkdir /srv/ipython/examples
 ADD helloworld.ipynb /srv/ipython/examples/helloworld.ipynb
 WORKDIR /srv/oauthenticator
 ENV OAUTHENTICATOR_DIR /srv/oauthenticator
-ENV OAUTH_CALLBACK_URL http://192.168.1.47:8080/hub/oauth_callback
-ENV CLIENT_ID e345bffe48cdad378f58
-ENV CLIENT_SECRET d53cfd0548904b1140a2f7d770ffc96fee491acb
+#ENV OAUTH_CALLBACK_URL http://192.168.1.47:8080/hub/oauth_callback
+#ENV CLIENT_ID e345bffe48cdad378f58
+#ENV CLIENT_SECRET d53cfd0548904b1140a2f7d770ffc96fee491acb
 ADD jupyterhub_config.py jupyterhub_config.py
 ADD addusers.sh /srv/oauthenticator/addusers.sh
 ADD userlist /srv/oauthenticator/userlist
