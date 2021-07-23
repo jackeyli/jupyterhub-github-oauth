@@ -4,8 +4,27 @@ c = get_config()
 
 c.JupyterHub.log_level = 10
 from oauthenticator.github import GitHubOAuthenticator
+from jupyterhub.auth import PAMAuthenticator
 
-c.JupyterHub.authenticator_class = GitHubOAuthenticator
+class WrappedGitHubAuthenticator(GitHubOAuthenticator):
+    async def authenticate(self,handler,data):
+        result = await GitHubOAuthenticator.authenticate(self, handler, data)
+        result['name'] = 'github_user_' + result['name']
+        return result
+
+class MyAuthenticator(WrappedGitHubAuthenticator,PAMAuthenticator):
+     def authenticate(self,handler,data):
+        if data is not None and 'localAuth' in data:
+            result =  PAMAuthenticator.authenticate(self,handler,data)
+            print('123123123',result)
+            return result
+        else:
+            return WrappedGitHubAuthenticator.authenticate(self, handler, data)
+
+c.JupyterHub.authenticator_class = MyAuthenticator
+
+
+
 
 import os
 import sys
@@ -39,16 +58,16 @@ def pre_spawn_hook(spawner):
     #     if not dir.exists():
     #         subprocess.check_call(['cp', '-r', '/srv/ipython/examples', '/home/' + username + '/examples'])
     #         subprocess.check_call(['chown','-R',username,'/home/' + username + '/examples'])
-    if check_allowed(username):
-        dir = Path('/home/' + username + '/examples')
-        if not dir.exists():
-            subprocess.check_call(['useradd', '-ms', '/bin/bash', username])
-            subprocess.check_call(['cp', '-r', '/srv/ipython/examples', '/home/' + username + '/examples'])
-            subprocess.check_call(['chown','-R',username,'/home/' + username + '/examples'])
+    dir = Path('/home/' + username + '/examples')
+    if not dir.exists():
+        subprocess.check_call(['cp', '-r', '/srv/ipython/examples', '/home/' + username + '/examples'])
+        subprocess.check_call(['chown','-R',username,'/home/' + username + '/examples'])
+c.JupyterHub.template_paths = [os.environ['OAUTHENTICATOR_DIR'] + '/templates']
 c.Spawner.pre_spawn_hook = pre_spawn_hook
-c.GitHubOAuthenticator.oauth_callback_url = os.environ['OAUTH_CALLBACK_URL']
-c.GitHubOAuthenticator.client_id = os.environ['CLIENT_ID']
-c.GitHubOAuthenticator.client_secret = os.environ['CLIENT_SECRET']
+c.MyAuthenticator.create_system_users = True
+c.MyAuthenticator.oauth_callback_url = os.environ['OAUTH_CALLBACK_URL']
+c.MyAuthenticator.client_id = os.environ['CLIENT_ID']
+c.MyAuthenticator.client_secret = os.environ['CLIENT_SECRET']
 # ssl config
 ssl = join(root, 'ssl')
 keyfile = join(ssl, 'ssl.key')
