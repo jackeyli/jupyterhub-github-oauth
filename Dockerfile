@@ -18,7 +18,7 @@ WORKDIR /srv/oauthenticator
 ENV OAUTHENTICATOR_DIR /srv/oauthenticator
 ENV OAUTH_CALLBACK_URL http://192.168.1.47:8000/hub/oauth_callback
 ENV CLIENT_ID e345bffe48cdad378f58
-ENV CLIENT_SECRET d53cfd0548904b1140a2f7d770ffc96fee491acb
+ENV CLIENT_SECRET 95e3fa5557bbe93d8d2dc6e25d8ca80b7c5aeedf
 ADD templates templates
 ADD jupyterhub_config.py jupyterhub_config.py
 ADD addusers.sh /srv/oauthenticator/addusers.sh
