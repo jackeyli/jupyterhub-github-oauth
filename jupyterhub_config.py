@@ -3,6 +3,7 @@
 c = get_config()
 
 c.JupyterHub.log_level = 10
+from jinja2 import Template
 from oauthenticator.github import GitHubOAuthenticator
 from jupyterhub.auth import PAMAuthenticator
 from jupyterhub.apihandlers.base import APIHandler
@@ -91,31 +92,31 @@ class ExtloginHandler(BaseHandler):
     """Render the login page."""
 
     def _render(self, login_error=None, username=None,password=None):
+        context = {
+            "next": url_escape(self.get_argument('next', default='')),
+            "username": username,
+            "password":password,
+            "login_error": login_error,
+            "login_url": self.settings['login_url'],
+            "authenticator_login_url": url_concat(
+                self.authenticator.login_url(self.hub.base_url),
+                {'next': self.get_argument('next', '')},
+            ),
+        }
+        custom_html = Template(
+            self.authenticator.get_custom_html(self.hub.base_url)
+        ).render(**context)
         return self.render_template('external_login.html',
-                next=url_escape(self.get_argument('next', default='')),
-                username=username,
-                login_error=login_error,
-                password=password,
-                custom_html=self.authenticator.custom_html,
-                login_url=self.settings['login_url'],
-                authenticator_login_url=url_concat(
-                    self.authenticator.login_url(self.hub.base_url),
-                    {'next': self.get_argument('next', '')},
-                ),
+                **context,
+                custom_html=custom_html,
         )
-    def get_template(self, name):
-        """Return the jinja template object for a given name"""
-        print('123123123')
-        print(self.settings['jinja2_env'])
-        return self.settings['jinja2_env'].get_template(name)
     async def get(self):
-        self.statsd.incr('login.request')
         user = self.get_current_user()
         username = self.get_argument('username', default='')
         password = self.get_argument('password',default='')
         print('12312312312')
         print(username,password)
-        self.finish(self._render(username=username,password=password))
+        self.finish(await self._render(username=username,password=password))
 
 c.JupyterHub.extra_handlers = [("/external/users", ExtUserAPIHandler),("/external/login",ExtloginHandler)]
 

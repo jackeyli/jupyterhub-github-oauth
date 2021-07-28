@@ -7,7 +7,6 @@ FROM jupyterhub/jupyterhub
 # Install oauthenticator from git
 RUN python3 -m pip install oauthenticator
 RUN python3 -m pip install notebook
-
 # Create oauthenticator directory and put necessary files in it
 RUN mkdir /srv/oauthenticator
 RUN mkdir /srv/ipython
