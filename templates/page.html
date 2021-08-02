@@ -95,18 +95,18 @@
 {% block nav_bar %}
   <nav class="navbar navbar-default">
     <div class="container-fluid">
-      <div class="navbar-header">
-      
-        <img style="width:34px;height:34px" src="https://avatars.githubusercontent.com/u/84963271?s=200&v=4"/>
-        <span style="line-height:34px"> Delta</span>
-        <span id="jupyterhub-logo" class="pull-left"><a href="{{logo_url or base_url}}"><img src='{{base_url}}logo' alt='JupyterHub' class='jpy-logo' title='Home'/></a></span>
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#thenavbar" aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-      </div>
+      <!--<div class="navbar-header">-->
+      <!---->
+        <!--<img style="width:34px;height:34px" src="https://avatars.githubusercontent.com/u/84963271?s=200&v=4"/>-->
+        <!--<span style="line-height:34px"> Delta</span>-->
+        <!--<span id="jupyterhub-logo" class="pull-left"><a href="{{logo_url or base_url}}"><img src='{{base_url}}logo' alt='JupyterHub' class='jpy-logo' title='Home'/></a></span>-->
+        <!--<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#thenavbar" aria-expanded="false">-->
+          <!--<span class="sr-only">Toggle navigation</span>-->
+          <!--<span class="icon-bar"></span>-->
+          <!--<span class="icon-bar"></span>-->
+          <!--<span class="icon-bar"></span>-->
+        <!--</button>-->
+      <!--</div>-->
 
       <div class="collapse navbar-collapse" id="thenavbar">
         {% if user %}
@@ -124,13 +124,13 @@
           {% block nav_bar_right_items %}
             <li>
               {% block login_widget %}
-                <span id="login_widget">
-                  {% if user %}
-                    <a id="logout" role="button" class="navbar-btn btn-sm btn btn-default" href="{{logout_url}}"> <i aria-hidden="true" class="fa fa-sign-out"></i> Logout</a>
-                  {% else %}
-                    <a id="login" role="button" class="btn-sm btn navbar-btn btn-default" href="{{login_url}}">Login</a>
-                  {% endif %}
-                </span>
+                <!--<span id="login_widget">-->
+                  <!--{% if user %}-->
+                    <!--<a id="logout" role="button" class="navbar-btn btn-sm btn btn-default" href="{{logout_url}}"> <i aria-hidden="true" class="fa fa-sign-out"></i> Logout</a>-->
+                  <!--{% else %}-->
+                    <!--<a id="login" role="button" class="btn-sm btn navbar-btn btn-default" href="{{login_url}}">Login</a>-->
+                  <!--{% endif %}-->
+                <!--</span>-->
               {% endblock %}
             </li>
           {% endblock %}
