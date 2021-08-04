@@ -93,7 +93,7 @@
 </noscript>
 
 {% block nav_bar %}
-  <nav class="navbar navbar-default">
+  <nav class="navbar navbar-default" style="display:none">
     <div class="container-fluid">
       <!--<div class="navbar-header">-->
       <!---->
@@ -108,34 +108,34 @@
         <!--</button>-->
       <!--</div>-->
 
-      <div class="collapse navbar-collapse" id="thenavbar">
-        {% if user %}
-        <ul class="nav navbar-nav">
-          {% block nav_bar_left_items %}
-            <li><a href="{{base_url}}home">Home</a></li>
-            <li><a href="{{base_url}}token">Token</a></li>
-            {% if user.admin %}
-            <li><a href="{{base_url}}admin">Admin</a></li>
-            {% endif %}
-          {% endblock %}
-        </ul>
-        {% endif %}
-        <ul class="nav navbar-nav navbar-right">
-          {% block nav_bar_right_items %}
-            <li>
-              {% block login_widget %}
-                <!--<span id="login_widget">-->
-                  <!--{% if user %}-->
-                    <!--<a id="logout" role="button" class="navbar-btn btn-sm btn btn-default" href="{{logout_url}}"> <i aria-hidden="true" class="fa fa-sign-out"></i> Logout</a>-->
-                  <!--{% else %}-->
-                    <!--<a id="login" role="button" class="btn-sm btn navbar-btn btn-default" href="{{login_url}}">Login</a>-->
-                  <!--{% endif %}-->
-                <!--</span>-->
-              {% endblock %}
-            </li>
-          {% endblock %}
-        </ul>
-      </div>
+      <!--<div class="collapse navbar-collapse" id="thenavbar">-->
+        <!--{% if user %}-->
+        <!--&lt;!&ndash;<ul class="nav navbar-nav">&ndash;&gt;-->
+          <!--&lt;!&ndash;{% block nav_bar_left_items %}&ndash;&gt;-->
+            <!--&lt;!&ndash;<li><a href="{{base_url}}home">Home</a></li>&ndash;&gt;-->
+            <!--&lt;!&ndash;<li><a href="{{base_url}}token">Token</a></li>&ndash;&gt;-->
+            <!--&lt;!&ndash;{% if user.admin %}&ndash;&gt;-->
+            <!--&lt;!&ndash;<li><a href="{{base_url}}admin">Admin</a></li>&ndash;&gt;-->
+            <!--&lt;!&ndash;{% endif %}&ndash;&gt;-->
+          <!--&lt;!&ndash;{% endblock %}&ndash;&gt;-->
+        <!--&lt;!&ndash;</ul>&ndash;&gt;-->
+        <!--{% endif %}-->
+        <!--&lt;!&ndash;<ul class="nav navbar-nav navbar-right">&ndash;&gt;-->
+          <!--&lt;!&ndash;{% block nav_bar_right_items %}&ndash;&gt;-->
+            <!--&lt;!&ndash;<li>&ndash;&gt;-->
+              <!--&lt;!&ndash;{% block login_widget %}&ndash;&gt;-->
+                <!--&lt;!&ndash;&lt;!&ndash;<span id="login_widget">&ndash;&gt;&ndash;&gt;-->
+                  <!--&lt;!&ndash;&lt;!&ndash;{% if user %}&ndash;&gt;&ndash;&gt;-->
+                    <!--&lt;!&ndash;&lt;!&ndash;<a id="logout" role="button" class="navbar-btn btn-sm btn btn-default" href="{{logout_url}}"> <i aria-hidden="true" class="fa fa-sign-out"></i> Logout</a>&ndash;&gt;&ndash;&gt;-->
+                  <!--&lt;!&ndash;&lt;!&ndash;{% else %}&ndash;&gt;&ndash;&gt;-->
+                    <!--&lt;!&ndash;&lt;!&ndash;<a id="login" role="button" class="btn-sm btn navbar-btn btn-default" href="{{login_url}}">Login</a>&ndash;&gt;&ndash;&gt;-->
+                  <!--&lt;!&ndash;&lt;!&ndash;{% endif %}&ndash;&gt;&ndash;&gt;-->
+                <!--&lt;!&ndash;&lt;!&ndash;</span>&ndash;&gt;&ndash;&gt;-->
+              <!--&lt;!&ndash;{% endblock %}&ndash;&gt;-->
+            <!--&lt;!&ndash;</li>&ndash;&gt;-->
+          <!--&lt;!&ndash;{% endblock %}&ndash;&gt;-->
+        <!--&lt;!&ndash;</ul>&ndash;&gt;-->
+      <!--</div>-->
 
       {% block header %}
       {% endblock %}
